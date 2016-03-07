@@ -36,19 +36,16 @@ class HomeTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+   
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 20
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("HomeData", forIndexPath: indexPath) as! HomeTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("HomeData") as! HomeTableViewCell
         let query = PFQuery(className: "Post")
         query.orderByDescending("_created_at")
         query.includeKey("author")

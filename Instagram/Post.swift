@@ -13,7 +13,7 @@ import Parse
 class Post: NSObject {
     class func postUserImage(image: UIImage?, withCaption caption: String?, withCompletion completion: PFBooleanResultBlock?) {
         // Create Parse object PFObject
-        let media = PFObject(className: "UserMedia")
+        let media = PFObject(className: "Post")
         
         // Add relevant fields to the object
         media["media"] = getPFFileFromImage(image) // PFFile column type

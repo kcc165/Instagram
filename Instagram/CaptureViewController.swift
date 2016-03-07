@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
@@ -24,34 +25,19 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
         
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-    @IBAction func onChoose(sender: AnyObject) {
+    
+    
+    @IBAction func onChoose(sender: UIButton) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .PhotoLibrary
         
         presentViewController(imagePicker, animated: true, completion: nil)
-    }
-    func resize(image: UIImage, newSize: CGSize) -> UIImage {
-        let resizeImageView = UIImageView(frame: CGRectMake(0, 0, newSize.width, newSize.height))
-        resizeImageView.contentMode = UIViewContentMode.ScaleAspectFill
-        resizeImageView.image = image
-        
-        UIGraphicsBeginImageContext(resizeImageView.frame.size)
-        resizeImageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
     }
     
     @IBAction func onSubmit(sender: AnyObject) {
@@ -65,18 +51,34 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
                 print("Yikes, didn't work!")
             }
         }
+    }
+    
+    func resize(image: UIImage, newSize: CGSize) -> UIImage {
+        let resizeImageView = UIImageView(frame: CGRectMake(0, 0, newSize.width, newSize.height))
+        resizeImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        resizeImageView.image = image
         
-        
-        func imagePickerController(picker: UIImagePickerController,
-            didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-                let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-                capturePicture.contentMode = .ScaleAspectFill
-                
-                
-                
-                capturePicture.image = originalImage
-                dismissViewControllerAnimated(true, completion: nil)
-        }
+        UIGraphicsBeginImageContext(resizeImageView.frame.size)
+        resizeImageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+    
+    func imagePickerController(picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+            let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+            capturePicture.contentMode = .ScaleAspectFill
+            
+            
+            
+            capturePicture.image = originalImage
+            dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     
