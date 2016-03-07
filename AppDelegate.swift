@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         )
         if PFUser.currentUser() != nil{
-            let viewcontroller = storyboard.instantiateViewControllerWithIdentifier("HomeViewController")
+            let viewcontroller = storyboard.instantiateViewControllerWithIdentifier("IGNavagation")
             window?.rootViewController = viewcontroller
         }
         return true
